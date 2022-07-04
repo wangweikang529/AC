@@ -1,0 +1,33 @@
+#include<iostream>
+#include<cstdio>
+#include<vector> 
+#include<queue>
+
+using namespace std;
+
+int n;
+priority_queue<int,vector<int>,greater<int>>v;
+long long res;
+
+int main()
+{
+	scanf("%d",&n);
+	for(int i=1;i<=n;i++)
+	{
+		int x;
+		scanf("%d",&x);
+		v.push(x);
+	}
+	while(v.size()>1)
+	{
+		int a,b;
+		a=v.top();
+		v.pop();
+		b=v.top();
+		v.pop();
+		v.push(a+b);
+		res+=(a+b);
+	}
+	cout<<res;
+	return 0;
+}
