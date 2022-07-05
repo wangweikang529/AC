@@ -1,0 +1,14 @@
+#include<iostream>
+#include<iomanip>
+#include<cstdio>
+#include<cmath>
+
+using namespace std;
+
+int main()
+{
+	printf("%.3lf", 500.0 / 3); break;
+  //printf("%6lf", 500.0 / 3); break;这样写不对，a.b a是指总共算上整数和小数点和小数一共占几个字节，与有效数字无关
+  //最好的与有效数字有关的是用cout   #include<iomanip>  cout<<fixed<<setprecision(3)<<1.0*500/3;
+	return 0;
+}
