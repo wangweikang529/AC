@@ -1,0 +1,21 @@
+#include<iostream>
+#include<cstdio>
+#include<string>
+#include<vector>
+
+using namespace std;
+
+int main()
+{
+	long long res;
+	cin>>res;
+	cout<<(((res&0x0000ffff)<<16)|((res&0xffff0000)>>16));
+	//cout<<(((res&0x0000ffff)<<16)^((res&0xffff0000)>>16));
+	return 0;
+}
+//数论基础里边 & 按位与 |按位或  <<左移 >>右移 ^按位异或
+//直接res&0x0000ffff将最高位的削去，留下最低位，再进行左移16位，用<<
+//直接res&0xffff0000将最低为的削去，留下最高位，再进行右移16位，用>>
+//空余的位置是0，将两个合并在一起，因为空余的位置位0.可以用|按位或，也可以按位异或
+
+
