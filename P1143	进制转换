@@ -4,7 +4,7 @@
 #include<vector>
 
 using namespace std;
-string x;//字符 
+string x;//字符   
 int n;
 long long res;
 vector<int>cnt;
