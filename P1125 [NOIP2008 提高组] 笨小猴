@@ -1,0 +1,43 @@
+#include<iostream>
+#include<cstdio>
+
+using namespace std;
+
+
+int v[26],mn,mx;
+char x;
+bool is_prime(int x)
+{
+	if(x<2)return false;
+	for(int i=2;i<=x/i;i++)
+		if(x%i==0)return false;
+    return true;
+}
+
+int main()
+{
+	x=getchar();
+	
+	while(x!='\n')
+	{
+		v[x-'a']++;
+		x=getchar();
+	}
+	
+	for(int i=1;i<26;i++)
+	{
+		if(v[i]!=0)
+		mn=v[i],mx=v[i];
+	}//需要注意的是最大值和最小是的初始值如何设定
+  //可以采用上边的一样，多一个循环，找到部位0的任意一个数值
+  //还可以mn=3,mx=9999//但是有一定的风险，可能最小值比1大，结果可能出差错
+  //也可以	mn=999,mx=-500;这样设置基本没问题
+	for(int i=1;i<26;i++)
+	{
+		if(v[i]<mn&&v[i]!=0)mn=v[i];//0除外，因为没有存在 
+		else if(v[i]>mx) mx=v[i];
+	}
+	if(is_prime(mx-mn))cout<<"Lucky Word"<<endl<<mx-mn;
+	else cout<<"No Answer"<<endl<<0;
+	return 0;
+}
