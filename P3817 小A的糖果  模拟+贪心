@@ -26,5 +26,5 @@ int main()
     cout<<res; 
 	return 0;
 } 
-//	v[i+1]=max(0,x-v[i]);//可以采用这样max减少的分支 
+
  
