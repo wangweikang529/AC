@@ -1,0 +1,30 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+
+using namespace std;
+
+const int mas=1e5+5;
+int v[mas];
+int n,x;
+long long res;
+
+int main()
+{
+    scanf("%d%d",&n,&x);
+    for(int i=1;i<=n;i++)
+    scanf("%d",&v[i]);
+    
+    for(int i=1;i<n;i++)
+	{
+		if(v[i]+v[i+1]>x)
+		{
+	     	res+=v[i]+v[i+1]-x;
+	     	v[i+1]=max(0,x-v[i]);//可以采用这样max减少的分支 
+		}	 
+	}
+    cout<<res; 
+	return 0;
+} 
+//	v[i+1]=max(0,x-v[i]);//可以采用这样max减少的分支 
+ 
