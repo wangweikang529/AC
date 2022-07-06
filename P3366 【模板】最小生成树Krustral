@@ -1,0 +1,86 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+
+using namespace std;
+
+const int mas=5e3+3;
+int f[mas];
+int n,m;
+long long res;
+//并查集可以使用一个f[mas]即可，但是kruskal需要将边数进行从小到大的排序，排序还得记住u,v
+//所以必须使用结构体存储，最后结果长度和 
+struct node{
+	int u,v,w;
+}N[200005];
+
+bool cmp(node x,node y)
+{
+	return x.w<y.w;
+}
+void inint()
+{
+	for(int i=1;i<mas;i++)//i<=mas可能数组越界，多出来的一个位置真好使n的位置 
+	f[i]=i;
+	return ;
+}
+int find(int x)
+{
+	if(x==f[x])return x;
+	return f[x]=find(f[x]);
+}
+void merge(int x,int y)//路径压缩以后，最大可能是f[x]==find(x),但是大多数不一定 
+{
+	if(find(x)==find(y))return ;//注意find和f不一样 
+	f[find(x)]=find(y);//这里的问题，合并之前看看两大领头人是否一样，不一样，将领头人的父节点交换 
+	return ;
+}
+void kruskal()
+{
+	sort(N+1,N+m+1,cmp);
+	for(int i=1;i<=m;i++)
+	{
+		if(find(N[i].u)!=find(N[i].v))//注意find和f不一样 
+		{
+			res+=N[i].w;
+			merge(N[i].u,N[i].v);
+		}
+	}
+	
+	
+		for(int i=1;i<n;i++)
+		{
+          	if(find(i)!=find(i+1))//注意find和f不一样 
+			{
+				cout<<"orz";
+				return ;
+			}
+		}
+	   cout<<res; 
+	   return ;  
+	
+}
+int main()
+{
+	scanf("%d%d",&n,&m);
+	
+	for(int i=1;i<=m;i++)
+		scanf("%d%d%d",&N[i].u,&N[i].v,&N[i].w);
+    inint();
+	kruskal();
+	return 0;
+}
+/*bool cmp(node x,node y)
+{
+	return x.w<y.w;
+}*///	return x.w<y.w;这样就AC了
+/*bool cmp(node x,node y)
+{
+	return x.w<=y.w;
+}*///这样就有4个TLE
+//f[x]只是代表着当前的父节点 用来判断是否为头节点，即：find()函数的终止条件：f[x]是找父节点，不是找根节点的，find()函数值来找根节点的
+//find()找根节点的函数
+
+
+
+ 
