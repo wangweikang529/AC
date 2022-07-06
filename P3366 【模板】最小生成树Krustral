@@ -74,6 +74,11 @@ int main()
 {
 	return x.w<y.w;
 }*///	return x.w<y.w;这样就AC了
+//原因：bool cmp(a,b),规定 cmp(a,b)返回1，那么cmp(b,a)就返回0，否则就是不成立
+//如果带上=,那么cmp(a,b)  a<=b返回1；cmp(b,a) b<=a返回1.
+
+
+
 /*bool cmp(node x,node y)
 {
 	return x.w<=y.w;
