@@ -1,0 +1,42 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+
+using namespace std;
+
+const int mas=1e6+5;
+int n,res;
+struct node{
+	int x,y;
+}d[mas];
+
+bool cmp(node a,node b)
+{
+	return a.y<b.y;
+} 
+
+int main()
+{
+	scanf("%d",&n);
+    for(int i=1;i<=n;i++)
+		scanf("%d%d",&d[i].x,&d[i].y);
+	sort(d+1,d+1+n,cmp);
+	
+	res++;
+	
+//双指针问题
+
+    int l=1;
+    for(int r=1;r<=n;r++)
+    {
+		if(d[l].y<=d[r].x)
+		{
+			res++;
+			l=r;
+		}
+	}
+ cout<<res;
+	return 0;
+} 
+
+ 
