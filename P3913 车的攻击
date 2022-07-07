@@ -1,0 +1,40 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<cstring>
+#include<queue>
+#include<algorithm>
+
+using namespace std;
+
+vector<long long>x,y;
+long long n,k;
+
+int main()
+{
+   scanf("%lld%lld",&n,&k);
+   for(int i=1;i<=k;i++)
+   {
+   	long long a,b;
+   	scanf("%lld%lld",&a,&b);
+   	 x.push_back(a);
+	   y.push_back(b);
+	 
+   }
+   sort(x.begin(),x.end());
+   sort(y.begin(),y.end());
+   long long  u=unique(x.begin(),x.end())-x.begin();
+   long long  v=unique(y.begin(),y.end())-y.begin();
+   
+   //long long  u=x.size(),v=y.size();
+   cout<<(u+v)*n-u*v;
+   
+   
+   
+  
+}
+
+ 
+ 
+ 
+ 
