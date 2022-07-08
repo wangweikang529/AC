@@ -1,0 +1,49 @@
+#include<iostream>
+#include<cstdio>
+#include<map>
+#include<string>
+#include<algorithm>
+
+//所有同学之间会有相同的作业 
+using namespace std;
+
+struct P{
+	string v;
+	int c;
+}p[105];
+string x;
+int n,mi;
+bool cmp(P a,P b)
+{
+	return a.v<b.v;
+	
+}
+
+int main()
+{
+	cin>>x;
+	scanf("%d",&n);
+   int d=n;
+	while(n--)//这减去 
+	{
+		string temp;
+		int cnt=0;
+		cin>>temp;
+		if(temp.size()==x.size())
+        {
+            for(int i=0;i<temp.size();i++)
+			if(temp[i]==x[i])cnt++;//没有给cnt赋值
+        }
+		mi=max(mi,cnt);
+	    p[n]={temp,cnt};	//？很大问题 
+	}	
+	
+    sort(p,p+d,cmp);
+    
+    for(int i=0;i<d;i++)//不再是n了
+    {
+		if(p[i].c==mi)
+		cout<<p[i].v<<endl; 
+    }
+	return 0;
+}
