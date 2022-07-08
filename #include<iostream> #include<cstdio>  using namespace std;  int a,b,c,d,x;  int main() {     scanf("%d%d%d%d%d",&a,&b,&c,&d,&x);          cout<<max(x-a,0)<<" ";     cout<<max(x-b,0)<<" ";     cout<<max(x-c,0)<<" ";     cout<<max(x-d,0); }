@@ -1,0 +1,16 @@
+#include<iostream>
+#include<cstdio>
+#include<map>
+#include<string>
+#include<algorithm>
+
+
+long long n;
+const int mas=998244353;
+
+int main()
+{
+	scanf("%lld",&n);
+	std::cout<<((n%mas)*(n%mas))%mas;
+	return 0;
+}
