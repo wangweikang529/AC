@@ -1,0 +1,16 @@
+#include<iostream>
+#include<cstdio>
+
+using namespace std;
+
+int a,b,c,d,x;
+
+int main()
+{
+    scanf("%d%d%d%d%d",&a,&b,&c,&d,&x);
+    
+    cout<<max(x-a,0)<<" ";
+    cout<<max(x-b,0)<<" ";
+    cout<<max(x-c,0)<<" ";
+    cout<<max(x-d,0);
+}
