@@ -1,0 +1,34 @@
+#include<iostream>
+#include<algorithm>
+#include<cstdio>
+
+using namespace std;
+
+const int mas=3e4+5;
+int v[mas];
+int x,res,n;
+bool cmp(int a,int b)
+{
+	return a>b;
+}
+
+int main()
+{
+    scanf("%d%d",&x,&n);
+    for(int i=1;i<=n;i++)
+    scanf("%d",&v[i]);
+    
+    sort(v+1,v+n+1,cmp);
+    
+    int l=1,r=n;
+    
+    while(l<r)
+    {
+		if(v[l]+v[r]<=x)l++,r--;
+		else l++;
+		res++;
+	}
+	if(l==r)res++;
+    cout<<res; 
+	return 0;
+}
