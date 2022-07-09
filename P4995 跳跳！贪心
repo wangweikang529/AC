@@ -1,0 +1,48 @@
+#include<iostream>
+#include<cstdio>
+#include<queue>
+#include<cstring>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+int n;
+int l,r;
+long long res;
+vector<int>p;
+bool cmp(int x,int y)
+{
+	return x>y;
+}
+
+int main()
+{
+	scanf("%d",&n);
+	for(int i=1;i<=n;i++)
+	{
+		int x;
+		scanf("%d",&x);
+		p.push_back(x);
+	}
+	sort(p.begin(),p.end(),cmp);
+	l=0,r=n-1;
+	res=p[0]*p[0];
+	
+	while(l<r)
+	{
+		res+=(p[l]-p[r])*(p[l]-p[r]);
+		l++;
+		if(l==r)break;
+		res+=(p[l]-p[r])*(p[l]-p[r]);
+		r--;
+	}
+	cout<<res;
+	return 0;
+}
+ 
+ 
+ 
+ 
+ 
+ 
