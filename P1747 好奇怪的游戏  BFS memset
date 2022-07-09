@@ -1,0 +1,75 @@
+#include<iostream>
+#include<cstdio>
+#include<queue>
+#include<cstring>
+
+using namespace std;
+
+const int mas=1000;
+
+struct c{
+	int x,y,cnt;
+};
+	
+
+
+int dx[]={-2,-2,-2,-2,-1,-1,1,1,2,2,2,2};
+int dy[]={2,1,-1,-2,2,-2,2,-2,2,1,-2,-1};
+bool vis[mas][mas];//如果方向是向着四面八方记得打标记 
+queue<c>p;
+int x1,y1,x2,y2;
+int res=9999;
+
+void bfs()
+{
+	while(!p.empty())
+	{
+		int a=p.front().x,b=p.front().y,c=p.front().cnt;
+		if(a==1&&b==1&&c<res)
+		res=c;
+			
+		p.pop();
+		for(int i=0;i<12;i++)
+		{
+			if(a+dx[i]<=0||b+dy[i]<=0||a+dx[i]>30||b+dy[i]>30||vis[a+dx[i]][b+dy[i]])
+		          continue;//注意顺序。否则会越界 
+			else 
+			{
+		      	vis[a+dx[i]][b+dy[i]]=1; 
+		     	p.push({a+dx[i],b+dy[i],c+1});
+				//	cout<<a+dx[i]<<" "<<b+dy[i]<<endl; 
+				//	vis[a][b]=1;//错了这里
+				}
+			}
+		//不用递归 
+	}
+	
+	return; 
+	
+}
+
+int main()
+{
+	  anf("%d%d%d%d",&x1,&y1,&x2,&y2);
+	  vis1][y1]=1;//入队之前就进行了初始化，第一个单独入队，也就是单独处理 
+	  push({x1,y1,0});
+    bfs();
+    cout<<res<<endl;
+    
+    
+    memset(vis,0,sizeof(vis));
+    res=9999;
+    vis[x2][y2]=1;
+    p.push({x2,y2,0});
+    bfs();
+    cout<<res<<endl;
+    
+    
+	return 0;
+}
+ 
+ 
+ 
+ 
+ 
+ 
