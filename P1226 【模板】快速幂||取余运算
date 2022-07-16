@@ -1,0 +1,24 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+using namespace std;
+
+
+int a,b,p,res=1,temp;
+
+int main()
+{
+    scanf("%d%d%d",&a,&b,&p);
+   
+    int x=a;
+    int y=b;
+    while(b)
+    {
+		if(b&1)res=1ll*res*a%p;
+		a=1ll*a*a%p;
+		b>>=1;//忘记进行改变b的数值 
+	}
+    cout<<x<<"^"<<y<<" mod "<<p<<"="<<res;
+  
+	return 0;
+}
