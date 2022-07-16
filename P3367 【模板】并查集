@@ -1,0 +1,42 @@
+#include<iostream>
+#include<cstdio>
+
+
+using namespace std;
+
+const int mas=1e4+5;
+int fa[mas];
+int n,m,p;
+
+void init()
+{
+	for(int i=1;i<=n;i++)
+	fa[i]=i;
+}
+int find(int x)
+{
+	if(x==fa[x])return x;
+	return fa[x]=find(fa[x]);
+}
+void merge(int x,int y)
+{
+	if(find(x)==find(y))return ;
+	fa[find(x)]=find(y);
+}
+int main()
+{
+   scanf("%d%d",&n,&m);
+   init();
+   for(int i=1;i<=m;i++)
+   {
+   	 int z,x,y;
+   	 scanf("%d%d%d",&z,&x,&y);
+   	 if(z==1)merge(x,y);
+   	 else if(z==2&&find(x)==find(y))puts("Y");
+   	 else puts("N");
+   }
+   
+
+  
+	return 0;
+}
