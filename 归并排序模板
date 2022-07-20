@@ -1,0 +1,45 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#include<vector>
+
+using namespace std;
+
+vector<int>v;
+int N;
+vector<int>&merge_sort(vector<int>&x,int l,int r)
+{
+    if(l>=r)return x;//只有一个数据或者没有数据直接返回
+    int mid=l+r>>1;
+    auto a=merge_sort(x,l,mid);
+    auto b=merge_sort(x,mid+1,r);
+    vector<int>c;
+    int i=l,j=mid+1;
+    while(i<=mid&&j<=r)
+    {
+        while(a[i]<=b[j]&&i<=mid&&j<=r) c.push_back(a[i]),i++;
+        while(a[i]>b[j]&&i<=mid&&j<=r) c.push_back(b[j]),j++;
+    }
+    while(i<=mid)c.push_back(a[i]),i++;
+    while(j<=r)c.push_back(b[j]),j++;
+    for(int i=0;i<c.size();i++)
+        x[i+l]=c[i];
+    
+    return x;
+}
+int main()
+{
+    scanf("%d",&N);
+    for(int i=0;i<N;i++)
+    {
+        int x;
+        scanf("%d",&x);
+        v.push_back(x);
+    }
+   merge_sort(v,0,N-1);
+    for(int i=0;i<N;i++)
+        cout<<v[i]<<" ";
+    return 0;
+
+}
