@@ -1,0 +1,50 @@
+#include<iostream>
+#include<cstdio>
+
+using namespace std;
+
+typedef long long ll;
+const int mas=2e5+5;
+ll len,n,k;
+int v[mas];
+
+
+bool check(int x)
+{//check时，为了不改变k,随机定义一个变量，最后于k进行比较；
+//这也是二分的技巧之一 
+    ll m=0;
+	for(int i=1;i<n;i++)
+	{
+		if(v[i+1]-v[i]>x)
+		{
+			m+=(v[i+1]-v[i])/x;//但是对于正好相除完的可以进行再判
+			if((v[i+1]-v[i])%x==0)
+			m--; 
+		}
+	}
+	if(m<=k)return 1;
+	return 0;
+}
+
+void one_half()
+{
+	ll l=0,r=len;
+    while(l<r)
+    {
+		ll mid=l+r>>1;
+		if(check(mid)) r=mid;//因为r=mid所以采用mid=l+r>>1; 
+		else l=mid+1;
+	}
+	cout<<r<<endl;
+	return ;
+}
+int main()
+{
+	scanf("%lld%lld%lld",&len,&n,&k);
+	for(int i=1;i<=n;i++)
+		scanf("%d",&v[i]);
+	one_half();
+	
+   return 0;
+} 
+
