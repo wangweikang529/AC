@@ -1,0 +1,50 @@
+#include<iostream>
+#include<cstdio>
+#include<cmath>
+
+using namespace std;
+typedef long long ll;
+ll t,n,m;
+const int mas=1e6+5;
+ll a[mas],b[mas],fa[mas],fb[mas];
+
+int main()
+{
+  
+    scanf("%lld",&t);
+    while(t--)
+    {
+        scanf("%lld%lld",&n,&m);
+        for(int i=1;i<=n;i++)
+        {
+            scanf("%lld",&a[i]);
+            fa[i]=a[i]-a[i-1];
+        }
+         
+        for(int i=1;i<=n;i++)
+        {
+            scanf("%lld",&b[i]);
+            fb[i]=b[i]-b[i-1];
+        }
+           
+       for(int i=1;i<=n-m+1;i++)
+       {
+           if(fa[i]!=fb[i])
+           {
+               int x=fa[i]-fb[i];
+               fb[i]+=x;
+               fb[i+m]-=x;
+           }
+       }
+        bool f=0;
+        for(int i=n-m+2;i<=n;i++)
+            if(fa[i]!=fb[i])
+            {
+                 f=1;
+                 puts("No");
+                break;//忘记break;导致会有多个No,但是样例不会显示
+            }
+        if(!f)puts("Yes");
+    }
+    return 0;
+}
