@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <cstdio>
+#include<algorithm>
+
+using namespace std;
+typedef long long ll;
+const int mas=1e9+7;
+ll res,n,t;
+
+int main()
+{
+	scanf("%lld",&t);
+	while(t--)
+	{
+		res=1;
+		scanf("%lld",&n);
+		for(int i=3;i<=2*n;i++)
+		 {
+			res*=i;
+		 	res%=mas;
+		 } 
+	    printf("%lld\n",res);
+	}
+     
+	 return 0;
+}
