@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cstring>
+#include <string>
+#include <cstdio>
+#include<algorithm>
+#include<cmath>
+
+using namespace std;
+typedef long long ll;
+const int mas=1e5+5;
+ll v[mas],cnt_front[mas],cnt_back[mas];
+ll n,res;
+
+int main()
+{
+	scanf("%lld",&n);
+	for(int i=1;i<=n;i++)
+	scanf("%lld",&v[i]);
+	
+	for(int i=1;i<=n;i++)
+	{
+		if(v[i]>=v[i-1])
+		cnt_front[i]=cnt_front[i-1]+1;
+		else cnt_front[i]=1;
+	}
+    
+    for(int i=n;i>=1;i--)
+    {
+        if(v[i]>=v[i+1])
+            cnt_back[i]=cnt_back[i+1]+1;
+        else cnt_back[i]=1;
+    }
+	//res=(1>>30);
+	res=0xffffffffffffffff;
+	for(int i=1;i<=n;i++)
+		res=max(cnt_front[i]+cnt_back[i]-1,res);
+		
+		//max(int,int )可以  max(int,double)//错误 
+    //long long 类型就是%lld  如果采用%d无用
+		cout<<res;
+	 return 0;
+}
