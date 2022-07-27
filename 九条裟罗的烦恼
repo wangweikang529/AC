@@ -1,0 +1,46 @@
+#include<iostream>
+#include<cstdio>
+#include<algorithm>
+
+using namespace std;
+
+typedef long long ll;
+const int mas=1e5+10;
+struct P{
+    int id,d;
+}p[mas];
+int n,m;
+bool cmp(P a,P b)
+{
+    return a.d==b.d?a.id<b.id:a.d<b.d;
+}
+int main()
+{
+   scanf("%d%d",&n,&m);
+    for(int i=1;i<=n;i++)
+    {
+        int dx;
+        scanf("%d",&dx);
+        p[i]={i,dx};
+    }
+    
+    sort(p+1,p+n+1,cmp);
+    
+    for(int i=1;i<=m;i++)
+    {
+        int dx;
+        scanf("%d",&dx);
+        int l=1,r=n;
+        while(l<r)
+        {
+            int mid=(l+r)>>1;
+            if(p[mid].d<dx)
+              l=mid+1;
+            else r=mid;
+        }
+        printf("%d\n",p[l].id);
+    }
+    
+    
+    return 0;
+}
