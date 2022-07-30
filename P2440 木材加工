@@ -1,0 +1,46 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<cmath>
+
+using namespace std;
+
+const int mas=1e6+5;
+typedef long long ll;
+int v[mas],n,k;
+
+
+
+bool check(ll c)
+{
+	if(!c)return 1;
+	ll cnt=0;
+	for(int i=1;i<=n;i++)
+		cnt+=v[i]/c;
+	 if(cnt>=k)return 1;
+	 return 0;
+}
+ll half()
+{
+	ll l=0,r=1e10;
+	while(l<r)
+	{
+		ll mid=l+r+1>>1;
+		if(check(mid))l=mid;
+		else r=mid-1;
+	}
+    if(!l)return 0;
+    return l;
+    
+}
+
+int main()
+{
+    scanf("%d%d",&n,&k);
+    
+    for(int i=1;i<=n;i++)
+       scanf("%d",&v[i]);
+       
+    cout<<half();
+    return 0;
+}
