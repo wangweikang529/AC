@@ -1,0 +1,43 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<cmath>
+
+using namespace std;
+
+const int mas=1e8;
+typedef long long ll;
+struct c{
+	int id,time;
+};
+c v[mas];//存放乘客 
+int cnt[mas];//判断国籍是否有，以及个数 
+int n,t,k,head=1,tail=0;//head删除，tail插入 
+ll res;
+
+int main()
+{
+     scanf("%d",&n);
+     while(n--)
+     {
+	 	scanf("%d%d",&t,&k);
+	 	for(int i=1;i<=k;i++)
+	 	{
+		 	int x;//代表国籍号 
+		 	scanf("%d",&x);
+		 	if(!cnt[x])res++;
+		 	cnt[x]++;//标记总共有几个该国籍的 
+		 	v[++tail]={x,t};
+		 //	v[++tail]=x;//将人入队 
+		 }
+	 	while(v[head].time<=t-86400)
+		 {
+		 	if(cnt[v[head].id]==1)res--;
+		 	cnt[v[head].id]--;//个数减一 
+		 	head++;//出队 
+		 }
+	 	printf("%lld\n",res);
+	 	
+	 }
+    return 0;
+}
