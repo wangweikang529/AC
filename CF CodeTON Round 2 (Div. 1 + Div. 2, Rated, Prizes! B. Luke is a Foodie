@@ -1,0 +1,40 @@
+#include<iostream>
+#include<cstdio>
+#include<vector>
+#include<cmath>
+ 
+using namespace std;
+ 
+const int mas=60;
+typedef long long ll;
+int t,n,m;
+char v[mas],x[mas];
+ 
+int main()
+{
+    scanf("%d",&t);
+    while(t--)
+    {
+        int cnt=0;
+        int n,x;
+        scanf("%d%d",&n,&x);
+        int c;
+        scanf("%d",&c);
+        int l=c-x,r=x+c;
+        for(int i=1;i<n;i++)
+        {
+            scanf("%d",&c);
+            l=max(l,c-x);
+            r=min(r,c+x);
+            if(l>r)
+            {
+                cnt++;
+                l=c-x;
+                r=c+x;
+            }
+        }  
+        printf("%d\n",cnt);
+    }
+ 
+    return 0;
+}
