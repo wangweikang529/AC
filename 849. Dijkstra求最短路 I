@@ -1,0 +1,51 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+const int mas=510;
+int dist[mas],v[mas][mas],n,m;
+bool vis[mas];
+
+
+void dijstra()
+{
+   // memset(dist+2,0x3f,sizeof(dist+2));
+    //for(int i=2;i<=n;i++)
+   // dist[i]=0x3f3f3f3f;
+    memset(dist,0x3f,sizeof(dist));
+    dist[1]=0;
+    for(int i=1;i<=n;i++)
+    {
+        int c=0;
+        for(int j=1;j<=n;j++)
+            if((!c||dist[c]>dist[j])&&!vis[j])c=j;
+        vis[c]=1;
+
+        for(int j=1;j<=n;j++)
+          dist[j]=min(dist[j],dist[c]+v[c][j]);
+    }
+    return ;
+}
+int main()
+{
+    scanf("%d%d",&n,&m);
+    memset(v,0x3f,sizeof(v));
+    for(int i=1;i<=n;i++)v[i][i]=0;
+    for(int i=1;i<=m;i++)
+    {
+        int x,y,z;
+        scanf("%d%d%d",&x,&y,&z);
+        v[x][y]=min(v[x][y],z);
+    }//数组初始化分为3步骤
+    //注意存图的时候分为三个步骤
+    //1>全部memset为最大值
+    //2>v[i][i] 全部赋值为0
+    //3>x,y,z进行赋值  这里需要注意的是：
+    //最短路径和成不成环无关，但是与重边有关，重边有最短路径采用，v[x][y]=min(z,v[x][y])
+    dijstra();
+    if(dist[n]==0x3f3f3f3f)puts("-1");
+    else printf("%d\n",dist[n]);
+    return 0;
+}
