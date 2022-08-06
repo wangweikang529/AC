@@ -1,0 +1,97 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+const int mas=1e5+10;
+int l[mas],r[mas],v[mas],hh,tt,idx,m;
+// l,r都代表着下标
+void init()
+{
+    hh=0,tt=1;
+    l[hh]=-1,r[hh]=1;
+    l[tt]=0,r[tt]=-1;
+    idx=1;//idx一般使用当前使用的最后一个数值
+   
+}
+
+void add_hh_l(int x)
+{
+    v[++idx]=x;//赋值
+    r[idx]=r[hh];//右端点
+    l[idx]=hh;//左端点
+     l[r[hh]]=idx;
+    r[hh]=idx;
+  
+}
+
+void add_tt_r(int x)
+{
+    v[++idx]=x;//赋值
+    l[idx]=l[tt];
+    r[idx]=tt;
+    r[l[tt]]=idx;
+    l[tt]=idx;
+}
+void remove_k(int k)
+{
+    r[l[k]]=r[k];
+    l[r[k]]=l[k];
+}
+
+void add_k_l(int k,int x)
+{
+    v[++idx]=x;
+    r[idx]=k;
+    l[idx]=l[k];
+    r[l[k]]=idx;
+    l[k]=idx;
+}
+void add_k_r(int k,int x)
+{
+    v[++idx]=x;
+    l[idx]=k;
+    r[idx]=r[k];
+    l[r[k]]=idx;
+    r[k]=idx;
+}
+int main()
+{
+    scanf("%d",&m);
+    init();
+    while(m--)
+    {//问题这里是字符串
+        string op;
+        cin>>op;
+        int k,x;
+        if(op=="L")//注意是双引号
+        {
+            scanf("%d",&x);
+            add_hh_l(x);
+        }
+        else if(op=="R")
+        {
+            scanf("%d",&x);
+            add_tt_r(x);
+        }
+        else if(op=="D")
+        {
+            scanf("%d",&k);
+            remove_k(k+1);
+        }
+        else if(op=="IL")
+        {
+            scanf("%d%d",&k,&x);
+            add_k_l(k+1,x);
+        }
+        else if(op=="IR")
+        {
+            scanf("%d%d",&k,&x);
+            add_k_r(k+1,x);
+        }
+    }
+    for(int i=r[0];r[i]!=-1;i=r[i])//r[i]==-1则说明是最后一个，而且最后一个也不回出现
+        printf("%d ",v[i]);
+    return 0;
+}
