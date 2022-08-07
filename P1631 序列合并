@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include<queue>
+
+using namespace std;
+
+const int mas=1e5+5;//因为这道题前边的情况队后边的情况造成影响，可以进行递推但是不可以浅醉和截取 
+typedef long long ll;
+
+ll A[mas],B[mas],res[mas];
+int n;
+
+priority_queue<ll,vector<ll>,less<ll>>q;
+
+int main()
+{
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++)
+    scanf("%lld",&A[i]);
+    
+    for(int i=1;i<=n;i++)
+    scanf("%lld",&B[i]);
+    
+    sort(A+1,A+n+1);
+    sort(B+1,B+n+1);
+    
+    for(int i=1;i<=n;i++)
+		for(int j=1;j<=n;j++)
+		{
+				ll x=A[i]+B[j];
+				if(q.size()<n)
+				q.push(x);
+				else 
+				{
+				    if(q.top()>x)
+				    {
+				        q.pop();
+				        q.push(x);
+				    }
+				    else break;
+				}
+		}	
+		
+		
+		
+   for(int i=n;i>=1;i--)
+  {
+  	res[i]=q.top();
+  	q.pop();
+  }
+   
+  for(int i=1;i<=n;i++)
+  printf("%lld ",res[i]);
+  
+}
