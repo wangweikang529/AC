@@ -1,0 +1,17 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+const int mas=1e6+5;//因为这道题前边的情况队后边的情况造成影响，可以进行递推但是不可以浅醉和截取 
+typedef unsigned long long ull;
+ull n;
+
+
+int main()
+{
+    scanf("%lld",&n);
+    printf("%lld\n",n*(n-1)/2*(n-2)/3*(n-3)/4);
+    return 0;
+}
