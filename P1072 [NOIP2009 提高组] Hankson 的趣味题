@@ -1,0 +1,44 @@
+#include<iostream>
+#include<cstdio>
+
+using namespace std;
+typedef long long ll;
+int n,a0,a1,b0,b1;
+int gcd(int x,int y)
+{
+	//return y==0?:x;gcd(y,x%y);//我超，标点写错了
+	 return y?gcd(y,x%y):x;
+} 
+
+int main()
+{
+	scanf("%d",&n);
+
+	while(n--)
+	{
+	   ll cnt=0;
+	   scanf("%d%d%d%d",&a0,&a1,&b0,&b1);
+	   
+	   
+	   //判断是否为素数   sqrt(n),sqrt(n)范围内如果如果存在就不是
+	   //分解质因子  sart(n)+1  ,因为最多只有一个是大于sqrt(n)所以+1 
+	   // 寻找因子  0（n）+1或者是2*sqrt(n) +1  值得注意的是1和本身也是因子 
+	   
+	//  for(int i=1;i<=b1;i++)
+	//  		if((b1%i==0)&&(i%a1==0)&&(gcd(i/a1,a0/a1)==1)&&(gcd(b1/b0,b1/i)==1))cnt++;
+// 0（n）+1的时间复杂度过高采用2*sqrt(n) +1的时间复杂度进行优化
+     for(int i=1;i<=b1/i;i++)
+     {
+         if(b1%i==0)
+         {
+             if(i%a1==0&&gcd(i/a1,a0/a1)==1&&gcd(b1/b0,b1/i)==1)cnt++;
+             if(i==b1/i)continue;
+             if(b1/i%a1==0&&gcd(b1/i/a1,a0/a1)==1&&gcd(b1/b0,b1/(b1/i))==1)cnt++;
+         }
+     }
+	   	
+	   	printf("%d\n",cnt);
+	  }
+	return 0;
+
+}
