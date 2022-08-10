@@ -1,0 +1,50 @@
+class Solution {
+public:
+    //BFS
+    
+    int get_sum(int x,int y)
+    {
+        int res=0;
+        while(x)
+        {
+            res+=x%10;
+            x/=10;
+        }
+        while(y)
+        {
+            res+=y%10;
+            y/=10;
+        }
+        return res;
+    }
+    int movingCount(int threshold, int rows, int cols)
+    {
+
+        int k=threshold,r=rows,c=cols;
+        if(!r||!c)return 0;
+        int cnt=1;
+        //0，0的位置一定是可以的
+        //不可以再用暴力进行for 循环，因为有的点不可以进行到达，采用dfs
+        //从里边不能扩展出任何的其他的点
+        vector<vector<bool> >p(r,vector<bool>(c,0));
+        int dx[4]={0,0,-1,1},dy[4]={1,-1,0,0};
+       queue<pair<int,int> >l;
+        l.push(make_pair(0,0));
+        p[0][0]=1;
+        while(l.size())
+        {
+            int x=l.front().first,y=l.front().second;
+            l.pop();
+            //for(int i=0;i<4;i++)
+           // for(int j=0;j<4;j++)
+           //不是这样循环的啊
+           for(int i=0;i<4;i++)
+            if(x+dx[i]>=0&&y+dy[i]>=0&&x+dx[i]<r&&y+dy[i]<c&&!p[x+dx[i]][y+dy[i]]&&get_sum(x+dx[i],y+dy[i])<=k)
+            //注意先进行判断数据的下标范围要不然会有段错误
+            p[x+dx[i]][y+dy[i]]=1,l.push(make_pair(x+dx[i],y+dy[i])),cnt++;
+            
+        }
+        return cnt;
+        
+    }
+};
