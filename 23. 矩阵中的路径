@@ -1,0 +1,44 @@
+class Solution {
+public:
+  bool dfs(vector<vector<char> >&m,string &s,int c,int x,int y)
+  {//已经确定就是这种，此时的是对的
+      int dx[4]={0,0,-1,1},dy[4]={1,-1,0,0};
+      if(c==s.size()-1)return true;
+      //已经正确了以后再回传递，所以一定正确
+      char q=m[x][y];
+      m[x][y]='c';
+      //因为和主函那种不一样，所以要利用返回值
+      for(int i=0;i<4;i++)
+      {
+         int a=x+dx[i],b=y+dy[i];
+         if(a>=0&&a<m.size()&&b>=0&&b<m[0].size()&&s[c+1]==m[a][b])
+         if(dfs(m,s,c+1,a,b))return true;
+         //最后一个是true，则一直会向前转递
+      }
+      m[x][y]=q;
+      return false;
+  }
+    
+    
+    
+    
+    bool hasPath(vector<vector<char> >& matrix, string &str) 
+    {
+        
+        for(int i=0;i<matrix.size();i++)
+        {
+            for(int j=0;j<matrix[i].size();j++)
+            {
+                if(str[0]==matrix[i][j])
+                {
+                     if(dfs(matrix,str,0,i,j))//1 代表着是第几个已经相同 ,i j代表着位置
+                     return true;
+                }
+               
+            }
+        }
+        return false;
+            
+    }
+       
+};
