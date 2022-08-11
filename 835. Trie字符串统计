@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+const int mas=2e6+10;
+
+int v[mas][26],ed[mas];
+int n,tot=1;//用于记录总共使用了几个；
+
+void insert(string c)
+{
+    int p=1;//代表着下一个的位置
+    for(int i=0;i<c.size();i++)
+    {
+        int x=c[i]-'a';
+        if(v[p][x]==0)v[p][x]=++tot;
+        p=v[p][x];
+    }
+    ed[p]++;
+}
+
+int query(string c)
+{
+    int p=1;
+    for(int i=0;i<c.size();i++)
+    {
+        p=v[p][c[i]-'a'];
+        if(p==0)return 0;
+    }
+    return ed[p];
+    
+}
+int main()
+{
+    scanf("%d",&n);
+   for(int i=1;i<=n;i++)
+   {
+      char x;cin>>x;
+      string c;cin>>c;
+      if(x=='I')insert(c);
+      else if(x=='Q')printf("%d\n",query(c));
+       
+   }
+    
+    
+    
+    return 0;
+}
+
+
