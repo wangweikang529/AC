@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+
+#define x first
+#define y second
+
+typedef long long ll;
+
+using namespace std;
+
+int cnt=1,n;
+vector<pair<ll,ll> >v;
+
+bool cmp(pair<ll,ll>a,pair<ll,ll>b)
+{
+    return a.x<b.x;
+}
+int main()
+{
+    scanf("%d", &n);
+    for(int i=1;i<=n;i++)
+    {
+        int a,b;
+        scanf("%d%d",&a,&b);
+        v.push_back(make_pair(a,b));
+    }
+    sort(v.begin(),v.end(),cmp);
+    ll l=v[0].x,r=v[0].y;
+    for(int i=1;i<n;i++)
+    {
+        if(r<v[i].x)
+        {
+            cnt++;
+            l=v[i].x,r=v[i].y;
+        }
+        else {
+            l=max(l,v[i].x);
+            r=min(r,v[i].y);
+        }
+    }
+    printf("%d\n",cnt);
+    return 0;
+}
+
