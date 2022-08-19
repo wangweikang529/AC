@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+typedef pair<int,int> PII;
+
+vector<PII>alls;
+int n;
+
+void merge(vector<PII>&all)//进行的是地址传递，内容会发生变换
+{
+    vector<PII>res;
+    sort(all.begin(),all.end());//默认的是队x的数值及逆行排序
+    
+    int st=-2e9,ed=-2e9;
+    for(auto i:all)//代表的是all[i],里边的每一个元素
+    {
+      if(ed<i.first)
+      {
+          if(ed!=-2e9)res.push_back({st,ed});
+          st=i.first,ed=i.second;
+          //如果ed==-2e9    st=i.first,ed=i.second;
+          //ed=!=-2e9  res.push_back({st,ed}); st=i.first,ed=i.second;
+          //因为他是每次将前边的一个压进数组中
+          //当你找到一个新的区间，需要将之前的一个区间压入数组中，但是前提是，看看是否有区间
+      }
+      else ed=max(i.second,ed);
+    }
+    //执行最后一个数组
+    if(st!=-2e9)res.push_back({st,ed});
+    alls=res;
+}
+int main()
+{
+    scanf("%d",&n);
+    for(int i=1;i<=n;i++)
+    {
+        int l,r;
+        scanf("%d%d",&l,&r);
+        alls.push_back(make_pair(l,r));
+    }
+    merge(alls);
+    cout<<alls.size();
+   return 0;
+}
