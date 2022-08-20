@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+typedef long long ll;
+const int mas=1e5+1,mod=1e9+7;
+
+int fact[mas],infact[mas];
+
+int n;
+int qmi(int x,int q)
+{
+    int res=1;
+    for(int i=1;i<32;i++)
+    {//不是里边一共有多少个1，所以做高位的符号位可以进行省略
+        if(q&1)res=1ll*res*x%mod;
+        x=1ll*x*x%mod;
+        //注意快速幂同类型不断进行平方，会造成溢出
+        q>>=1;
+    }
+    return res;
+}
+
+
+int main()
+{
+   
+    //从0开始只有0才是1，因为C（n,0）=1
+    fact[0]=infact[0]=1;
+    
+    for(int i=1;i<mas;i++)
+    {//注意排列组合是从0开始的，初始值是从1开始的
+        fact[i]=1ll*fact[i-1]*i%mod;//会爆int
+        infact[i]=1ll*infact[i-1]*qmi(i,mod-2)%mod;
+        
+    }
+     scanf("%d",&n);
+    while (n -- ){
+        int a,b;
+        scanf("%d%d",&a,&b);
+        printf("%lld\n",1ll*fact[a]*infact[a-b]%mod*infact[b]%mod);
+        //注意最多两个就进行一个%mod，否则会爆int
+    }
+    return 0;
+}
