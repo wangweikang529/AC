@@ -1,0 +1,25 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+const int N = 1e5+10;
+int v[N],m;
+int l=0,r=-1;
+string str;
+
+int main()
+{
+    scanf("%d",&m);
+    while(m--)
+    {
+        int c;
+       cin>>str;
+        if(str=="push")scanf("%d",&c),v[++r]=c;
+        else if(str=="pop")--r;
+        else if(str=="empty")if(l<=r)puts("NO");else puts("YES");
+        else if(str=="query")cout<<v[r]<<endl;
+    }
+    return 0;
+}
